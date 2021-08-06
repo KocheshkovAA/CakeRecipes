@@ -144,8 +144,7 @@ def select_all_ingredients(conn) -> list:
         cursor.execute("SELECT * FROM ingredients")
         rows = cursor.fetchall()
         ingredients = []
-        for row in rows:
-            ingredients.append(row)
+        ingredients = [row for row in rows]
         return ingredients
 
 
@@ -155,8 +154,7 @@ def select_all_dish(conn) -> list:
         cursor.execute("SELECT * FROM dish")
         rows = cursor.fetchall()
         dishes = []
-        for row in rows:
-            dishes.append(row)
+        dishes = [row for row in rows]
         return dishes
 
 
@@ -166,9 +164,8 @@ def select_ingredients(conn,id_dish) -> list:
         cursor.execute("SELECT * FROM amount WHERE id_dish=?", (id_dish,))
         rows = cursor.fetchall()
         ingredients = []
-        for row in rows:
-            ingredients.append(row)
-        return ingredients
+        ingredients = [row for row in rows]
+        return ingredients 
     
 
 def main():
@@ -178,5 +175,8 @@ def main():
     conn = create_connection(database)
     database_creation()
     with conn:
-        print(select_ingredients(conn,5125))
+        print(select_all_ingredients(conn))
+        print(select_all_dish(conn))
+        print(select_ingredients(conn,515))
 
+main()
